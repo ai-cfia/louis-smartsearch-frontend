@@ -1,11 +1,11 @@
 import './App.css';
-import { SearchBar } from './components/SearchBar';
+import Layout from './pages/layout/Layout';
 
 function App() {
   return (
-    <div className="App">
-      <header className="searchBar-container">
-        <SearchBar/>
+    <div>
+      <header>
+        <Layout/>
       </header>
     </div>
   );
