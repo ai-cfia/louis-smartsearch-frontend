@@ -1,0 +1,32 @@
+.results-list {
+    width: 100%;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0px 0px 8px #ddd;
+    border-radius: 10px;
+    margin-top: 1rem;
+    max-height: 300px;
+    overflow-y: auto;
+    margin-left: 25px;
+}
+
+.searchPage_header {
+    display: flex;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background-color: white;
+    align-items: flex-start;
+    padding: 30px;
+    border-bottom: 1px;
+    margin-left: 10vh;
+}
+
+.search-result {
+    padding: 10px 20px;
+}
+
+.search-result:hover {
+    background-color: #dcdcdc;
+}

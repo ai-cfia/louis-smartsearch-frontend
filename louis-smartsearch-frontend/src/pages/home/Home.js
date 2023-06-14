@@ -1,8 +1,8 @@
 import { SearchBar } from '../../components/SearchBar';
 import cfia from "../../assets/CFIA_Banner.png";
-import styles from "../layout/Layout.module.css";
+import styles from "../home/Home.module.css";
 
-const Layout = () => {
+const Home = () => {
 
     return (
         <div className={styles.layout}>
@@ -27,6 +27,9 @@ const Layout = () => {
                 </div>
             </header>
 
+            <div className="logo-container">
+                <text style={{fontWeight: 'bold', fontSize: 50}}>CFIA Smart Search</text>
+            </div>
             <div className="searchBar-container">
                 <SearchBar/>
             </div>
@@ -35,4 +38,4 @@ const Layout = () => {
     );
 };
 
-export default Layout;
+export default Home;
