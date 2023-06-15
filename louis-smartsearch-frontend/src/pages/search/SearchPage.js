@@ -1,9 +1,16 @@
 import { SearchBar } from '../../components/SearchBar';
 import cfia from "../../assets/CFIA_Banner.png";
 import styles from "../home/Home.module.css";
-import { SearchResultsList } from '../../components/SearchResultsList';
+import { useStateValue } from '../../StateProvider';
+import useApiUtil from '../../useApiUtil';
+import "../../components/SearchResultsList.css";
+import { SearchResult } from '../../components/SearchResult';
 
-const Layout = () => {
+const SearchPage = () => {
+
+    const [{term}] = useStateValue();
+    const {data} = useApiUtil(term);
+    console.log("This is the data 2: " + data);
 
     return (
         <div className={styles.layout}>
@@ -36,10 +43,12 @@ const Layout = () => {
                     <SearchBar/>
                 </div>
             </div>
-            <SearchResultsList/>
 
+            {data !==null && data.map((item) => (
+                 <SearchResult item={item}/>
+            ))}
         </div>
     );
 };
 
-export default Layout;
+export default SearchPage;

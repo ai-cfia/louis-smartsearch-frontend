@@ -3,14 +3,22 @@ import {FaSearch} from "react-icons/fa"
 import "./SearchBar.css"
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
+import { useStateValue } from "../StateProvider.js"
+import { actionTypes } from '../reducer';
 
 export const SearchBar = () => {
 
+    const [{}, dispatch] = useStateValue();
     const [searchQuery, setSearchQuery] = useState('');
     const history = useHistory();
+    
     const search=(e)=>{
         e.preventDefault();
         history.push("/search?");
+        dispatch({
+            type:actionTypes.SET_SEARCH_TERM,
+            term:searchQuery
+        })
     }
 
     return(
@@ -23,7 +31,7 @@ export const SearchBar = () => {
                     onChange={e=>setSearchQuery(e.target.value)}
                 />
             </div>
-            <button type="Submit" onClick={search}>Click Me</button>
+            <button type="Submit" onClick={search}>Search</button>
 
         </form>
 
