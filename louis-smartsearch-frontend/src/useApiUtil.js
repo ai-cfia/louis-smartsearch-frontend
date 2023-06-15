@@ -35,7 +35,7 @@ const useApiUtil = (term) => {
 
         fetchData();
 
-    }, [term])
+    })
 
     
     return { data };
