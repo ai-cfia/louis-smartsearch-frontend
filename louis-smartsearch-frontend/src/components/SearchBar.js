@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {FaSearch} from "react-icons/fa"
+import {FaSearch, FaArrowRight} from "react-icons/fa"
 import "./SearchBar.css"
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
@@ -8,10 +8,11 @@ import { actionTypes } from '../reducer';
 
 export const SearchBar = () => {
 
-    const [{}, dispatch] = useStateValue();
+    const [{}, dispatch] = useStateValue(); 
     const [searchQuery, setSearchQuery] = useState('');
     const history = useHistory();
     
+    // On form submission perform search.
     const search=(e)=>{
         e.preventDefault();
         history.push("/search?");
@@ -24,14 +25,17 @@ export const SearchBar = () => {
     return(
         <form className="form-wrapper">
             <div className="input-wrapper" >
-                <FaSearch id="search-icon" />
+                <FaSearch id="fa-arrow-right"/>
                 <input
                     placeholder="Type to search..."
                     value={searchQuery}
                     onChange={e=>setSearchQuery(e.target.value)}
                 />
+                <button className='button' type="Submit" onClick={search}>
+                    <FaArrowRight id="fa-arrow-right" style={{color: "#05486c"}}/>
+                </button>
             </div>
-            <button type="Submit" onClick={search}>Search</button>
+
 
         </form>
 

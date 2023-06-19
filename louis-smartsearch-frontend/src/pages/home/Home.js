@@ -1,37 +1,26 @@
 import { SearchBar } from '../../components/SearchBar';
-import cfia from "../../assets/CFIA_Banner.png";
 import styles from "../home/Home.module.css";
+import Header from '../../components/Header';
+import CFIALogo from '../../components/CFIALogo';
+
 
 const Home = () => {
 
     return (
         <div className={styles.layout}>
-            <header className={styles.header} role={"banner"}>
-                <div className={styles.headerContainer}>
 
-                    <nav>
-                        <ul className={styles.headerNavList}>
-                            <li className={styles.headerNavLeftMargin}>
-                                <a href="https://inspection.canada.ca/" title="ACIA | CFIA">
-                                    <img
-                                        src={cfia}
-                                        alt="CFIA logo"
-                                        aria-label="Link to CFIA | Lien à l'ACIA"
-                                        className={styles.githubLogo}
-                                    />
-                                </a>
-                            </li>
-                        </ul>
-                    </nav>
-
-                </div>
-            </header>
+            <Header/>
 
             <div className="logo-container">
-                <text style={{fontWeight: 'bold', fontSize: 50}}>CFIA Smart Search</text>
+                <CFIALogo/>
             </div>
             <div className="searchBar-container">
                 <SearchBar/>
+            </div>
+
+            <div style={{display: 'flex', textAlign: 'center', marginTop:20, flexDirection: 'column', alignItems:'center', color: 'grey'}}>
+                <text>Empowering agency's users with precision search.</text>
+                <text style={{marginTop: 10}}>Équiper les utilisateurs de l'agence avec la recherche de précision.</text>
             </div>
 
         </div>
