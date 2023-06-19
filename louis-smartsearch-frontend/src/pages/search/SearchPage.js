@@ -23,7 +23,7 @@ const SearchPage = () => {
             <CFIALogo/>
 
                 <div className="searchBar-container-search">
-                    <SearchBar/>
+                    <SearchBar term={term}/>
                 </div>
             </div>
 

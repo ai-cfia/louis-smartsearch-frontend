@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useEffect } from "react";
 import {FaSearch, FaArrowRight} from "react-icons/fa"
 import "./SearchBar.css"
 import { useState } from "react";
@@ -6,12 +7,24 @@ import { useHistory } from "react-router-dom";
 import { useStateValue } from "../StateProvider.js"
 import { actionTypes } from '../reducer';
 
-export const SearchBar = () => {
+export const SearchBar = ({term}) => {
 
     const [{}, dispatch] = useStateValue(); 
     const [searchQuery, setSearchQuery] = useState('');
     const history = useHistory();
-    
+    const [previousSearchQuery, setPreviousSearchQuery] = useState('');
+
+    useEffect(() => {
+        
+        if (typeof term === 'undefined'){
+            setPreviousSearchQuery('Type to search...')
+        }
+        else{
+            setPreviousSearchQuery(term)
+
+        }
+    })
+
     // On form submission perform search.
     const search=(e)=>{
         e.preventDefault();
@@ -27,7 +40,7 @@ export const SearchBar = () => {
             <div className="input-wrapper" >
                 <FaSearch id="fa-arrow-right"/>
                 <input
-                    placeholder="Type to search..."
+                    placeholder={previousSearchQuery}
                     value={searchQuery}
                     onChange={e=>setSearchQuery(e.target.value)}
                 />
