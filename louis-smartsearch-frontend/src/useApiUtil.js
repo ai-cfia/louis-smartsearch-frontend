@@ -7,7 +7,7 @@ const useApiUtil = (term) => {
 
         const fetchData = async () => {
             try{
-                const response = await fetch("https://louis-demo-gd5sj5te5a-nn.a.run.app/search", {
+                const response = await fetch(process.env.REACT_APP_BACKEND_URL, {
                     method: "POST",
                     headers: {
                         'Content-Type':'application/json'
