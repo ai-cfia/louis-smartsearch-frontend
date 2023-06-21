@@ -1,50 +1,55 @@
 import React from 'react';
 
-/**
- * Component to highlight specific words in a paragraph of content.
- *
- * @param {string} content - The paragraph content to be displayed.
- * @param {string} term - The term to be highlighted in the content.
- * @returns {JSX.Element} - The rendered component.
- */
-const HighlightedContent = ({ content, term }) => {
-  // Split the content into individual sentences
-  const sentences = content.split('.').map(sentence => sentence.trim());
+// HighlightedContent component
+const HighlightedContent = ({ content, query }) => {
 
-  return (
-    <>
-      {sentences.map((sentence, index) => {
-        // Split each sentence into individual words
-        const words = sentence.split(' ');
+  // Function to highlight words within a sentence
+  const highlightWords = (sentence) => {
+    const words = sentence.split(' ');
+    const highlightedIndices = []; // Array to store indices of highlighted words
 
-        return (
-          <span key={index}>
-            {words.map((word, wordIndex) => {
-              // Normalize the word by removing punctuation for comparison
-              const normalizedWord = word.replace(/[.,?!]/g, '');
-              // Check if the normalized word includes the search term
-              const isMatch = normalizedWord.toLowerCase().includes(term.toLowerCase());
-              // Extract the punctuation from the original word
-              const punctuation = word.slice(normalizedWord.length);
+    const renderedWords = words.map((word, wordIndex) => {
+      const normalizedWord = word.replace(/[.,?!]/g, ''); // Remove punctuation for comparison
+      const shouldHighlight = query.toLowerCase().includes(normalizedWord.toLowerCase()) && normalizedWord.length > 3; // Check if word length is greater than 4
+      const punctuation = word.slice(normalizedWord.length).replace(/[.,?!]/g, ''); // Extract punctuation
 
-              return (
-                <React.Fragment key={wordIndex}>
-                  {/* Render the word with appropriate formatting */}
-                  {isMatch ? <strong>{normalizedWord}</strong> : normalizedWord}
-                  {/* Add a space between words */}
-                  {wordIndex !== words.length - 1 && <span> </span>}
-                  {/* Add punctuation if it exists and the word is a match */}
-                  {isMatch && punctuation && <span>{punctuation}</span>}
-                </React.Fragment>
-              );
-            })}
-            {/* Add a period after each sentence */}
-            {index !== sentences.length - 1 && <span>. </span>}
-          </span>
-        );
-      })}
-    </>
-  );
+      if (shouldHighlight) {
+        highlightedIndices.push(wordIndex); // Add the word index to highlightedIndices
+      }
+
+      return (
+        <React.Fragment key={wordIndex}>
+          {shouldHighlight ? <strong>{word}</strong> : word} {/* Highlight the word if shouldHighlight is true */}
+          {wordIndex !== words.length - 1 && <span> </span>} {/* Add a space between words */}
+          {shouldHighlight && punctuation && <span>{punctuation}</span>} {/* Render punctuation if it exists */}
+        </React.Fragment>
+      );
+    });
+
+    return { renderedWords, highlightedIndices }; // Return the rendered words and highlighted word indices
+  };
+  
+
+  // Function to render highlighted sentences
+  const renderHighlightedSentences = () => {
+    const sentences = content.split('. '); // Split the content into sentences
+
+    return sentences.map((item, index) => {
+      const trimmedSentence = item.trim(); // Trim leading and trailing whitespace
+      const { renderedWords, highlightedIndices } = highlightWords(trimmedSentence); // Highlight the words in the sentence
+
+      return (
+        <span key={index}>
+          {/*<p style={{color: 'red'}}>{highlightedIndices}</p>*/}
+          {renderedWords} {/* Render the highlighted words */}
+          {index !== sentences.length - 1 && <span>. </span>} {/* Add a period and space between sentences */}
+        </span>
+      );
+    });
+  };
+
+  // Render the highlighted sentences
+  return <>{renderHighlightedSentences()}</>;
 };
 
 export default HighlightedContent;
