@@ -27,7 +27,7 @@ const SearchPage = () => {
                 </div>
             </div>
 
-            <SearchResultList data={data} query={term}/>
+            <SearchResultList data={data} term={term}/>
 
         </div>
     );

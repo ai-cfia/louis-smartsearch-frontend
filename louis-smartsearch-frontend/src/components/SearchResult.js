@@ -3,7 +3,7 @@ import "./SearchResultsList.css"
 import HighlightedContent from "./HighlightedContent";
 
 // Search Result Component 
-export const SearchResult = ({ item, query })=> {
+export const SearchResult = ({ item, term })=> {
 
     useEffect(() => {
         
@@ -17,7 +17,7 @@ export const SearchResult = ({ item, query })=> {
             <div className="search-result">
                     <p className="title" style={{color: "blue"}}>{item.title}</p>
                     <p className="url">{item.url}</p>
-                    <HighlightedContent content={item.content} query={query}/>
+                    <HighlightedContent content={item.content} term={term}/>
             </div>
         </a>
     );
