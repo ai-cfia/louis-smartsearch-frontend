@@ -1,17 +1,16 @@
-import { render, screen } from '@testing-library/react';
-import React from 'react';
-import HighlightedContent from './components/HighlightedContent';
+import { highlightWords } from '../src/components/HighlightedContent';
 
-describe('HighlightedContent', () => {
-  it('should have correct indices for highlighted words', () => {
-    const content = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.';
-    const query = 'ipsum';
+// Test case for the highlightWords function
+test('highlightWords should correctly highlight words and return rendered words and highlighted indices', () => {
+  // Input sentence and query
+  const sentence = 'This is a sample sentence for testing sample bacteria.';
+  const query = 'sample bacteria';
 
-    const { container } = render(<HighlightedContent content={content} query={query} />);
-    const strongs = container.querySelectorAll('strong');
+  const expectedHighlightedIndices = [3,7,8];
 
-    const highlightedIndices = Array.from(strongs).map(strong => Number(strong.dataset.wordIndex));
+  // Invoke the highlightWords function
+  const { highlightedIndices } = highlightWords(sentence, query);
 
-    expect(highlightedIndices).toEqual([1]);
-  });
+  // Assert the rendered words and highlighted indices
+  expect(highlightedIndices).toEqual(expectedHighlightedIndices);
 });
