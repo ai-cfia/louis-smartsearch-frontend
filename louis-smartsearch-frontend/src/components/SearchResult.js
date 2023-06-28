@@ -1,8 +1,15 @@
-import React from "react"
+import React, { useEffect } from "react"
 import "./SearchResultsList.css"
+import HighlightedContent from "./HighlightedContent";
 
 // Search Result Component 
-export const SearchResult = ({ item })=> {
+export const SearchResult = ({ item, query })=> {
+
+    useEffect(() => {
+        
+        //console.log('This is the term' + term);
+
+    })
 
     return(
         <a key={item.id} href={item.url} target="_blank" rel="noopener noreferrer" style={{
@@ -10,7 +17,7 @@ export const SearchResult = ({ item })=> {
             <div className="search-result">
                     <p className="title" style={{color: "blue"}}>{item.title}</p>
                     <p className="url">{item.url}</p>
-                    <p className="content">{item.content.length > 700 ? item.content.substring(0,700) + '...': item.content}</p>
+                    <HighlightedContent content={item.content} query={query}/>
             </div>
         </a>
     );
