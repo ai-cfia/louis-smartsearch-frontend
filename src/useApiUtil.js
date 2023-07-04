@@ -5,6 +5,7 @@ const useApiUtil = (term) => {
 
     useEffect(() => {
 
+        // Function to fetch data from the API
         const fetchData = async () => {
             try{
                 const response = await fetch(process.env.REACT_APP_BACKEND_URL, {
@@ -33,11 +34,14 @@ const useApiUtil = (term) => {
         
         console.log(term);
 
-        fetchData();
-
+        // Check if the REACT_APP_BACKEND_URL is set
+        if(process.env.REACT_APP_BACKEND_URL){
+            fetchData();
+        } else{
+            console.error('The REACT_APP_BACKEND_URL environment variable is not set or empty.');
+        }
     })
 
-    
     return { data };
 
 }
