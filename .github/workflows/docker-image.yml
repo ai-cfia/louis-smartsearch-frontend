@@ -11,8 +11,8 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
-
+    environment: experimental
     steps:
     - uses: actions/checkout@v3
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag louis-finesse-frontend:$(date +%s)
+      run: docker build . --build-arg REACT_APP_BACKEND_URL=${{ vars.REACT_APP_BACKEND_URL }} --file Dockerfile --tag ${{ vars.LOUIS_REGISTRY }}/louis-finesse:latest
