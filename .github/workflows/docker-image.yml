@@ -42,6 +42,11 @@ jobs:
         run: |
           rm -rf /tmp/.buildx-cache
           mv /tmp/.buildx-cache-new /tmp/.buildx-cache
+
+  deploy:
+    runs-on: ubuntu-latest
+    environment: experimental
+    steps:
       - name: Authenticate to Google Cloud
         uses: google-github-actions/auth@v1
         with:
