@@ -30,10 +30,11 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-buildx
       - name: Build the Docker image
-        run: DOCKER_BUILDKIT=1 docker build . --build-arg REACT_APP_BACKEND_URL=$REACT_APP_BACKEND_URL --file Dockerfile --tag $LOUIS_REGISTRY/louis-finesse:latest --cache-from type=local,srdc=/tmp/.buildx-cache --cache-to: type=local,dest=/tmp/.buildx-cache-new
+        run: docker build . --build-arg REACT_APP_BACKEND_URL=$REACT_APP_BACKEND_URL --file Dockerfile --tag $LOUIS_REGISTRY/louis-finesse:latest --cache-from type=local,srdc=/tmp/.buildx-cache --cache-to: type=local,dest=/tmp/.buildx-cache-new
         env:
           REACT_APP_BACKEND_URL: ${{ secrets.REACT_APP_BACKEND_URL }}
           LOUIS_REGISTRY: ${{ secrets.LOUIS_REGISTRY }}
+          DOCKER_BUILDKIT: 1 
       - name: Move cache
         run: |
           rm -rf /tmp/.buildx-cache
