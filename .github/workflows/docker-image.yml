@@ -20,11 +20,24 @@ jobs:
           username: _json_key
           password: ${{ secrets.GAR_JSON_KEY }}
       - uses: actions/checkout@v3
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+      - name: Cache Docker layers
+        uses: actions/cache@v2
+        with:
+          path: /tmp/.buildx-cache
+          key: ${{ runner.os }}-buildx-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-buildx
       - name: Build the Docker image
-        run: docker build . --build-arg REACT_APP_BACKEND_URL=$REACT_APP_BACKEND_URL --file Dockerfile --tag $LOUIS_REGISTRY/louis-finesse:latest
+        run: DOCKER_BUILDKIT=1 docker build . --build-arg REACT_APP_BACKEND_URL=$REACT_APP_BACKEND_URL --file Dockerfile --tag $LOUIS_REGISTRY/louis-finesse:latest --cache-from type=local,srdc=/tmp/.buildx-cache --cache-to: type=local,dest=/tmp/.buildx-cache-new
         env:
           REACT_APP_BACKEND_URL: ${{ secrets.REACT_APP_BACKEND_URL }}
           LOUIS_REGISTRY: ${{ secrets.LOUIS_REGISTRY }}
+      - name: Move cache
+        run: |
+          rm -rf /tmp/.buildx-cache
+          mv /tmp/.buildx-cache-new /tmp/.buildx-cache
       - name: Push docker image
         run: docker push $LOUIS_REGISTRY/louis-finesse:latest
         env:
@@ -40,3 +53,5 @@ jobs:
           service: louis-finesse
           # Region in which the resource can be found.
           region: ${{ secrets.GCP_CLOUDRUN_REGION }}
+          # project
+          project: ${{ secrets. GCP_PROJECT }}
