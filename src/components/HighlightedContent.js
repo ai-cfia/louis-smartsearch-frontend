@@ -30,7 +30,7 @@ const renderHighlightedSentences = (content, query) => {
 
   const sentenceElements = sentences.map((item, index) => {
     const trimmedSentence = item.trim(); // Trim leading and trailing whitespace
-    const { renderedWords, highlightedIndices } = highlightWords(trimmedSentence, query); // Highlight the words in the sentence
+    const { renderedWords, /*highlightedIndices*/ } = highlightWords(trimmedSentence, query); // Highlight the words in the sentence
 
     return {
       sentence: renderedWords.map((wordObj, wordIndex) => ({
