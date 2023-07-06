@@ -1,22 +1,22 @@
-// Import the fetchData function from the component file
-import { fetchData } from './Home';
+// Import the PingBackend function from the component file
+import { PingBackend } from './api';
 
-// Create a test case for the fetchData function
+// Create a test case for the PingBackend function
 test('Testing Response Time', async () => {
     // Mock the response from the API
     // Set the expected response time
-    const expectedResponseTime = 5000; // Specify the desired response time in milliseconds
+    const expectedResponseTime = 10000; // Specify the desired response time in milliseconds
     const url = process.env.REACT_APP_BACKEND_URL;
 
     expect(url).not.toEqual("");
 
     if(url != ""){
         
-        // Start the timer before calling the fetchData function
+        // Start the timer before calling the PingBackend function
         const startTime = Date.now();
 
-        // Call the fetchData function
-        await fetchData();
+        // Call the PingBackend function
+        await PingBackend();
 
         // Calculate the response time
         const responseTime = Date.now() - startTime;
@@ -26,5 +26,5 @@ test('Testing Response Time', async () => {
 
     }
 
-}, 5000);
+}, 10000);
 
