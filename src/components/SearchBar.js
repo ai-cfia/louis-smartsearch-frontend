@@ -9,21 +9,19 @@ import { actionTypes } from '../reducer';
 
 export const SearchBar = ({term}) => {
 
-    const [{}, dispatch] = useStateValue(); 
+    const [, dispatch] = useStateValue(); 
     const [searchQuery, setSearchQuery] = useState('');
     const history = useHistory();
     const [previousSearchQuery, setPreviousSearchQuery] = useState('');
 
     useEffect(() => {
-        
-        if (typeof term === 'undefined'){
-            setPreviousSearchQuery('Type to search...')
+        if (typeof term === 'undefined') {
+          setPreviousSearchQuery('Type to search...');
+        } else {
+          setPreviousSearchQuery(term);
         }
-        else{
-            setPreviousSearchQuery(term)
-
-        }
-    })
+      }, [term]);
+      
 
     // On form submission perform search.
     const search=(e)=>{
