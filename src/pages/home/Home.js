@@ -11,19 +11,19 @@ const Home = () => {
 
     useEffect(() => {
         // Check if the REACT_APP_BACKEND_URL is set
-        if (process.env.REACT_APP_BACKEND_URL) {
+        if(process.env.REACT_APP_BACKEND_URL) {
             PingBackend().catch((error) => {
                 console.error("Error: ", error);
                 setIsError(true);
-                setAlertMessage("Request failed"); // Set the alert message on error
+                setAlertMessage("Warning: Initializing ping request to backend $REACT_APP_BACKEND_URL failed."); // Set the alert message on error
             });
         } else {
-            console.error('The REACT_APP_BACKEND_URL environment variable is not set or empty.');
+            console.error("Warning: Backend URL is not set, frontend is misconfigured.");
         }
 
-        if (!process.env.REACT_APP_BACKEND_URL || process.env.REACT_APP_BACKEND_URL === "") {
+        if(!process.env.REACT_APP_BACKEND_URL || process.env.REACT_APP_BACKEND_URL === "") {
             setIsError(true);
-            setAlertMessage("Warning: The backend URL is missing or empty. Please check your environment configuration.")
+            setAlertMessage("Warning: Backend URL is not set, frontend is misconfigured.")
           }
     });
 

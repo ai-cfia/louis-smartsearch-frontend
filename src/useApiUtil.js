@@ -6,7 +6,8 @@ const useApiUtil = (term) => {
     useEffect(() => {
 
         const fetchData = async () => {
-            try{
+
+            try{        
                 const response = await fetch(process.env.REACT_APP_BACKEND_URL + "/search", {
                     method: "POST",
                     headers: {
@@ -23,23 +24,21 @@ const useApiUtil = (term) => {
                     console.log(resposeData);
                     console.log("This is the data: " + data);
 
-                } else{
+                } else {
                     throw new Error("Request failed");
                 }
-            }catch (error){
+
+            } catch(error) {
                 console.error("Error: ", error);
             }
         }
-        
-        console.log(term);
 
+        console.log(term);
         fetchData();
 
     })
 
-    
     return { data };
-
 }
 
 export default useApiUtil;
