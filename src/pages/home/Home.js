@@ -7,13 +7,14 @@ import { PingBackend } from '../../api/api';
 
 const Home = () => {
     const [alertMessage, setAlertMessage] = useState(""); // State variable for the alert message
-    const [isBackendUrlMissing, setIsBackendUrlMissing] = useState(false); // State to track if the backend URL is missing
+    const [isError, setIsError] = useState(false); // State to track if the backend URL is missing
 
     useEffect(() => {
         // Check if the REACT_APP_BACKEND_URL is set
         if (process.env.REACT_APP_BACKEND_URL) {
             PingBackend().catch((error) => {
                 console.error("Error: ", error);
+                setIsError(true);
                 setAlertMessage("Request failed"); // Set the alert message on error
             });
         } else {
@@ -21,16 +22,17 @@ const Home = () => {
         }
 
         if (!process.env.REACT_APP_BACKEND_URL || process.env.REACT_APP_BACKEND_URL === "") {
-            setIsBackendUrlMissing(true);
+            setIsError(true);
+            setAlertMessage("Warning: The backend URL is missing or empty. Please check your environment configuration.")
           }
     });
 
     return (
         <div className={styles.layout}>
             <Header />
-            {isBackendUrlMissing && (
+            {isError && (
                 <div className={styles.warning}>
-                    Warning: The backend URL is missing or empty. Please check your environment configuration.
+                    {alertMessage}
                 </div>
             )}
             <div className="logo-container">
@@ -43,7 +45,6 @@ const Home = () => {
                 <text>Empowering agency's users with precision search.</text>
                 <text style={{ marginTop: 10 }}>Équiper les utilisateurs de l'agence avec la recherche de précision.</text>
             </div>
-            {alertMessage && <div>{alertMessage}</div>} {/* Render the alert message */}
         </div>
     );
 };
