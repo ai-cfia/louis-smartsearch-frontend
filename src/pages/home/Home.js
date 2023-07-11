@@ -7,6 +7,7 @@ import { PingBackend } from '../../api/api';
 
 const Home = () => {
     const [alertMessage, setAlertMessage] = useState(""); // State variable for the alert message
+    const [isBackendUrlMissing, setIsBackendUrlMissing] = useState(false); // State to track if the backend URL is missing
 
     useEffect(() => {
         // Check if the REACT_APP_BACKEND_URL is set
@@ -18,11 +19,20 @@ const Home = () => {
         } else {
             console.error('The REACT_APP_BACKEND_URL environment variable is not set or empty.');
         }
+
+        if (!process.env.REACT_APP_BACKEND_URL || process.env.REACT_APP_BACKEND_URL === "") {
+            setIsBackendUrlMissing(true);
+          }
     });
 
     return (
         <div className={styles.layout}>
             <Header />
+            {isBackendUrlMissing && (
+                <div className={styles.warning}>
+                    Warning: The backend URL is missing or empty. Please check your environment configuration.
+                </div>
+            )}
             <div className="logo-container">
                 <CFIALogo />
             </div>
