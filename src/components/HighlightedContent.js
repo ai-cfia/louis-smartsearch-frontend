@@ -3,7 +3,7 @@ import React from 'react';
 // Function to highlight words within a sentence
 export const highlightWords = (sentence, query) => {
   const words = sentence.split(' ');
-  //const highlightedIndices = []; // Array to store indices of highlighted words
+  const highlightedIndices = []; // Array to store indices of highlighted words
 
   const renderedWords = words.map((word, wordIndex) => {
     const normalizedWord = word.replace(/[.,?!]/g, ''); // Remove punctuation for comparison
@@ -11,7 +11,7 @@ export const highlightWords = (sentence, query) => {
     const punctuation = word.slice(normalizedWord.length).replace(/[.,?!]/g, ''); // Extract punctuation
 
     if (shouldHighlight) {
-      //highlightedIndices.push(wordIndex); // Add the word index to highlightedIndices
+      highlightedIndices.push(wordIndex); // Add the word index to highlightedIndices
     }
 
     return {
@@ -21,7 +21,7 @@ export const highlightWords = (sentence, query) => {
     };
   });
 
-  return { renderedWords, /*highlightedIndices*/ }; // Return the rendered words and highlighted word indices
+  return { renderedWords, highlightedIndices }; // Return the rendered words and highlighted word indices
 };
 
 // Function to render highlighted sentences
@@ -30,7 +30,9 @@ const renderHighlightedSentences = (content, query) => {
 
   const sentenceElements = sentences.map((item, index) => {
     const trimmedSentence = item.trim(); // Trim leading and trailing whitespace
-    const { renderedWords, /*highlightedIndices*/ } = highlightWords(trimmedSentence, query); // Highlight the words in the sentence
+        
+    // eslint-disable-next-line
+    const { renderedWords, highlightedIndices } = highlightWords(trimmedSentence, query); // Highlight the words in the sentence
 
     return {
       sentence: renderedWords.map((wordObj, wordIndex) => ({
