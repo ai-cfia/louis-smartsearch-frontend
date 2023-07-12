@@ -10,21 +10,20 @@ const Home = () => {
     const [isError, setIsError] = useState(false); // State to track if the backend URL is missing
 
     useEffect(() => {
-        // Check if the REACT_APP_BACKEND_URL is set
-        if(process.env.REACT_APP_BACKEND_URL) {
+
+        // Check if the backend URL is missing or empty
+        if(!process.env.REACT_APP_BACKEND_URL || process.env.REACT_APP_BACKEND_URL === "") {
+            setIsError(true);
+            setAlertMessage("Warning: Backend URL is not set, frontend is misconfigured.")
+        } else {
+            // Check if response is ok
             PingBackend().catch((error) => {
                 console.error("Error: ", error);
                 setIsError(true);
                 setAlertMessage("Warning: Initializing ping request to backend $REACT_APP_BACKEND_URL failed."); // Set the alert message on error
             });
-        } else {
-            console.error("Warning: Backend URL is not set, frontend is misconfigured.");
         }
 
-        if(!process.env.REACT_APP_BACKEND_URL || process.env.REACT_APP_BACKEND_URL === "") {
-            setIsError(true);
-            setAlertMessage("Warning: Backend URL is not set, frontend is misconfigured.")
-          }
     }, []);
 
     return (
