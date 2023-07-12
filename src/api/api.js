@@ -13,11 +13,11 @@ export const PingBackend = async () => {
 
         if(response.ok) {
             console.log("Active Server Connection");
-        } else{
+        } else {
             throw new Error("Request failed");
         }
         
-    }catch (error){
+    } catch(error) {
         console.error("Error: ", error);
     }
 }
