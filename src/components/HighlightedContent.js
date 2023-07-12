@@ -30,6 +30,8 @@ const renderHighlightedSentences = (content, query) => {
 
   const sentenceElements = sentences.map((item, index) => {
     const trimmedSentence = item.trim(); // Trim leading and trailing whitespace
+        
+    // eslint-disable-next-line
     const { renderedWords, highlightedIndices } = highlightWords(trimmedSentence, query); // Highlight the words in the sentence
 
     return {
