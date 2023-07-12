@@ -1,5 +1,5 @@
 // Import the PingBackend function from the component file
-import { PingBackend } from './api';
+import { PingBackend } from './useApiUtil';
 
 // Create a test case for the PingBackend function
 test('Testing Response Time', async () => {

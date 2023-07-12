@@ -1,7 +1,7 @@
 import { SearchBar } from '../../components/SearchBar';
 import styles from "../home/Home.module.css";
 import { useStateValue } from '../../StateProvider';
-import useApiUtil from '../../useApiUtil';
+import { useApiUtil } from '../../api/useApiUtil';
 import "../../components/SearchResultsList.css";
 import { SearchResultList } from '../../components/SearchResultsList';
 import Header from '../../components/Header';
