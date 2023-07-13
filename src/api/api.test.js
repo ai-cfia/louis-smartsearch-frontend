@@ -10,7 +10,7 @@ test('Testing Response Time', async () => {
 
     expect(url).not.toEqual("");
 
-    if(url != ""){
+    if(url != "") {
         
         // Start the timer before calling the PingBackend function
         const startTime = Date.now();
