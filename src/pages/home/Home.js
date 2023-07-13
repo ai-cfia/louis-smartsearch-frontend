@@ -3,7 +3,7 @@ import styles from "../home/Home.module.css";
 import Header from '../../components/Header';
 import CFIALogo from '../../components/CFIALogo';
 import { useState, useEffect } from "react";
-import { PingBackend } from '../../api/useApiUtil';
+import { PingBackend, GetEndpoint } from '../../api/useApiUtil';
 
 const Home = () => {
     const [alertMessage, setAlertMessage] = useState(""); // State variable for the alert message
@@ -16,7 +16,7 @@ const Home = () => {
           setAlertMessage("Warning: Backend URL is not set, frontend is misconfigured.")
         } else {
           // Check if response is ok
-          PingBackend()
+          PingBackend(GetEndpoint)
             .then(responseData => {
               if(Array.isArray(responseData) && responseData.length === 0) {
                 // Response data is an empty array
