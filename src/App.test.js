@@ -6,7 +6,7 @@ test('highlightWords should return highlighted indices', () => {
   const sentence = 'This is a sample sentence for testing sample bacteria.';
   const query = 'sample bacteria';
 
-  const expectedHighlightedIndices = [3,7,8];
+  const expectedHighlightedIndices = [3, 7, 8];
 
   // Invoke the highlightWords function
   const { highlightedIndices } = highlightWords(sentence, query);
@@ -16,34 +16,33 @@ test('highlightWords should return highlighted indices', () => {
 });
 
 test('highlightWords should not highlight any words when the query is empty', () => {
-    // Test input
-    const sentence = 'This is a sample sentence for testing sample.';
-    const query = '';
-  
-    const expectedHighlightedIndices = [];
-  
-    // Invoke the highlightWords function
-    const { highlightedIndices } = highlightWords(sentence, query);
-  
-    // Assert the rendered words and highlighted indices
-    expect(highlightedIndices).toEqual(expectedHighlightedIndices);
-  });
+  // Test input
+  const sentence = 'This is a sample sentence for testing sample.';
+  const query = '';
 
-  test('highlightWords should handle empty content', () => {
-    // Test input
-    const sentence = '';
-    const query = 'sample';
-  
-    // Expected output
-    const expectedHighlightedIndices = [];
-  
-    // Invoke the highlightWords function
-    const { highlightedIndices } = highlightWords(sentence, query);
-  
-    // Assert the rendered words and highlighted indices
-    expect(highlightedIndices).toEqual(expectedHighlightedIndices);
-  });
+  const expectedHighlightedIndices = [];
 
+  // Invoke the highlightWords function
+  const { highlightedIndices } = highlightWords(sentence, query);
+
+  // Assert the rendered words and highlighted indices
+  expect(highlightedIndices).toEqual(expectedHighlightedIndices);
+});
+
+test('highlightWords should handle empty content', () => {
+  // Test input
+  const sentence = '';
+  const query = 'sample';
+
+  // Expected output
+  const expectedHighlightedIndices = [];
+
+  // Invoke the highlightWords function
+  const { highlightedIndices } = highlightWords(sentence, query);
+
+  // Assert the rendered words and highlighted indices
+  expect(highlightedIndices).toEqual(expectedHighlightedIndices);
+});
 
 test('highlightWords should handle content shorter than query', () => {
   // Test input
@@ -58,7 +57,6 @@ test('highlightWords should handle content shorter than query', () => {
   // Assert the rendered words and highlighted indices
   expect(highlightedIndices).toEqual(expectedHighlightedIndices);
 });
-
 
 test('highlightWords should handle content without periods or question marks', () => {
   // Test input
@@ -75,15 +73,15 @@ test('highlightWords should handle content without periods or question marks', (
 });
 
 test('highlightWords should handle content with punctuation', () => {
-    // Test input
-    const sentence = 'This is a sample sentence, for testing! Sample.';
-    const query = 'sample';
-  
-    const expectedHighlightedIndices = [3, 7];
-  
-    // Invoke the highlightWords function
-    const { highlightedIndices } = highlightWords(sentence, query);
-  
-    // Assert the rendered words and highlighted indices
-    expect(highlightedIndices).toEqual(expectedHighlightedIndices);
-  });
+  // Test input
+  const sentence = 'This is a sample sentence, for testing! Sample.';
+  const query = 'sample';
+
+  const expectedHighlightedIndices = [3, 7];
+
+  // Invoke the highlightWords function
+  const { highlightedIndices } = highlightWords(sentence, query);
+
+  // Assert the rendered words and highlighted indices
+  expect(highlightedIndices).toEqual(expectedHighlightedIndices);
+});

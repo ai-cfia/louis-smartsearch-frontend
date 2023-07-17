@@ -1,10 +1,10 @@
-.App{
+.App {
   background-color: #ffffff;
   width: 100vw;
   height: 100vh;
 }
 
-.logo-container{
+.logo-container {
   padding-top: 20vh;
   width: 40%;
   margin: auto;
@@ -14,7 +14,7 @@
   min-width: 200px;
 }
 
-.logo-container-search{
+.logo-container-search {
   padding-top: 3vh;
   width: 40%;
   margin: auto;
@@ -24,7 +24,7 @@
   min-width: 200px;
 }
 
-.searchBar-container{
+.searchBar-container {
   padding-top: 5vh;
   width: 40%;
   margin: auto;
@@ -34,7 +34,7 @@
   min-width: 200px;
 }
 
-.searchBar-container-search{
+.searchBar-container-search {
   padding-top: 0;
   width: 60%;
   margin: auto;

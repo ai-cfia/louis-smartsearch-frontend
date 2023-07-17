@@ -7,7 +7,8 @@ export const highlightWords = (sentence, query) => {
 
   const renderedWords = words.map((word, wordIndex) => {
     const normalizedWord = word.replace(/[.,?!]/g, ''); // Remove punctuation for comparison
-    const shouldHighlight = query.toLowerCase().includes(normalizedWord.toLowerCase()) && normalizedWord.length > 4; // Check if word length is greater than 4
+    const shouldHighlight =
+      query.toLowerCase().includes(normalizedWord.toLowerCase()) && normalizedWord.length > 4; // Check if word length is greater than 4
     const punctuation = word.slice(normalizedWord.length).replace(/[.,?!]/g, ''); // Extract punctuation
 
     if (shouldHighlight) {
@@ -17,7 +18,7 @@ export const highlightWords = (sentence, query) => {
     return {
       word: shouldHighlight ? <strong>{word}</strong> : word, // Highlight the word if shouldHighlight is true
       hasSpace: wordIndex !== words.length - 1, // Add a space between words if it's not the last word
-      punctuation: shouldHighlight && punctuation ? <span>{punctuation}</span> : null, // Render punctuation if it exists and shouldHighlight is true
+      punctuation: shouldHighlight && punctuation ? <span>{punctuation}</span> : null // Render punctuation if it exists and shouldHighlight is true
     };
   });
 
@@ -30,17 +31,18 @@ const renderHighlightedSentences = (content, query) => {
 
   const sentenceElements = sentences.map((item, index) => {
     const trimmedSentence = item.trim(); // Trim leading and trailing whitespace
-        
+
     // eslint-disable-next-line
     const { renderedWords, highlightedIndices } = highlightWords(trimmedSentence, query); // Highlight the words in the sentence
 
     return {
+      // eslint-disable-next-line
       sentence: renderedWords.map((wordObj, wordIndex) => ({
         word: wordObj.word,
         hasSpace: wordObj.hasSpace,
-        punctuation: wordObj.punctuation,
+        punctuation: wordObj.punctuation
       })),
-      hasPeriod: index !== sentences.length - 1, // Add a period and space between sentences if it's not the last sentence
+      hasPeriod: index !== sentences.length - 1 // Add a period and space between sentences if it's not the last sentence
     };
   });
 
