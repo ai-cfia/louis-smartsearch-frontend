@@ -1,3 +1,5 @@
+Deprecated, see https://github.com/ai-cfia/finesse-frontend
+
 # Project Finesse
 
 ## Getting Started
